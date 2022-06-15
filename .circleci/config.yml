@@ -28,6 +28,9 @@ workflows:
       - path-filtering/filter:
           requires:
             - setup
+          pre-steps:
+            - attach_workspace:
+                at: /tmp/workspace
           base-revision: main
           config-path: /tmp/workspace/generated.yml
           mapping: |
