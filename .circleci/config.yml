@@ -8,7 +8,7 @@ orbs:
 jobs:
   setup:
     docker:
-      - image: circleci/golang:1.15-bullseye
+      - image: circleci/golang:1.15-buster
     steps:
       - checkout
       - run:
