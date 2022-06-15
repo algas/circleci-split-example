@@ -14,6 +14,7 @@ jobs:
       - run:
           name: Generate config
           command: |
+            mkdir -p /tmp/workspace
             ./generate-config.sh > /tmp/workspace/generated.yml
       - store_artifacts:
           path: /tmp/workspace
