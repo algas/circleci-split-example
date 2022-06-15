@@ -1,0 +1,22 @@
+parameters:
+  run-bar:
+    type: boolean
+    default: false
+
+jobs:
+  bar:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Bar Step
+          command: |
+            echo 'Hello World!'
+            echo 'this is bar package'
+
+workflows:
+  bar:
+    when: << pipeline.parameters.run-bar >>
+    jobs:
+      - bar

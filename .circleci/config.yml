@@ -8,14 +8,20 @@ orbs:
 jobs:
   setup:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/go:1.18.3
     steps:
       - checkout
+      - run:
+          name: Install yq
+          command: |
+            go install github.com/mikefarah/yq/v4@latest
+            yq --version
       - run:
           name: Generate config
           command: |
             mkdir -p /tmp/workspace
             ./generate-config.sh > /tmp/workspace/generated.yml
+            cat /tmp/workspace/generated.yml
       - persist_to_workspace:
           root: /tmp/workspace
           paths:

@@ -1,0 +1,22 @@
+parameters:
+  run-foo:
+    type: boolean
+    default: false
+
+jobs:
+  foo:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Foo Step
+          command: |
+            echo 'Hello World!'
+            echo 'foo package'
+
+workflows:
+  foo:
+    when: << pipeline.parameters.run-foo >>
+    jobs:
+      - foo

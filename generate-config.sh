@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cat .circleci/workflows.yml
+yq eval-all '. as $item ireduce ({}; . * $item )' ./workflows/_base.yml ./workflows/systems/*.yml
