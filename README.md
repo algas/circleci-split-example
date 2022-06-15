@@ -75,3 +75,8 @@ workflows:
     jobs:
       - foo
 ```
+
+## Reference
+
+- https://circleci.com/docs/2.0/using-dynamic-configuration/#execute-specific-workflows-or-steps-based-on-which-files-are-modified
+
