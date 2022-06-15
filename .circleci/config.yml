@@ -3,7 +3,6 @@ version: 2.1
 setup: true
 
 orbs:
-  path-filtering: circleci/path-filtering@0.0.2
   continuation: circleci/continuation@0.1.2
 
 jobs:
@@ -20,13 +19,7 @@ jobs:
           command: |
             cat .circleci/generated.yml
       - continuation/continue:
-          configuration_path: .circleci/generated.yml
-      - path-filtering/filter:
-          base-revision: main
-          config-path: .circleci/generated.yml
-          mapping: |
-            packages/foo/.* run-foo true
-            packages/bar/.* run-bar true
+          configuration_path: .circleci/filter.yml
 
 workflows:
   always-run:
