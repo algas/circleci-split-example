@@ -9,7 +9,7 @@ workflows:
   filter:
     jobs:
       - path-filtering/filter:
-          base-revision: develop
+          base-revision: main
           config-path: .circleci/workflows.yml
           mapping: |
             packages/foo/.* run-foo true
