@@ -16,8 +16,10 @@ jobs:
           command: |
             mkdir -p /tmp/workspace
             ./generate-config.sh > /tmp/workspace/generated.yml
-      - store_artifacts:
-          path: /tmp/workspace
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - generated.yml
 
 workflows:
   filter:
