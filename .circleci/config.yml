@@ -8,9 +8,7 @@ orbs:
 workflows:
   always-run:
     jobs:
-      - setup
       - path-filtering/filter:
-          requires: setup
           base-revision: main
           config-path: .circleci/continue.yml
           mapping: |
