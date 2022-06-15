@@ -7,7 +7,8 @@ orbs:
 
 jobs:
   setup:
-    executor: continuation/default
+    docker:
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
@@ -18,7 +19,7 @@ jobs:
 workflows:
   always-run:
     jobs:
-      - setup:
+      - setup
       - path-filtering/filter:
           requires:
             - setup
