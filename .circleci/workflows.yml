@@ -21,3 +21,24 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'this is bar package'
+
+parameters:
+  run-foo:
+    type: boolean
+    default: false
+  run-bar:
+    type: boolean
+    default: false
+
+workflows:
+  always-run:
+    jobs:
+      - setup
+  foo:
+    when: << pipeline.parameters.run-foo >>
+    jobs:
+      - foo
+  bar:
+    when: << pipeline.parameters.run-bar >>
+    jobs:
+      - bar
