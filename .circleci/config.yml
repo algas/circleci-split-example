@@ -7,21 +7,26 @@ orbs:
 
 jobs:
   setup:
-    executor: continuation/default
+    docker:
+      - image: cimg/base:2021.04
     steps:
       - checkout
       - run:
           name: Generate config
           command: |
-            ./generate-config.sh > .circleci/generated.yml
+            ./generate-config.sh > /tmp/workspace/generated.yml
+      - store_artifacts:
+          path: /tmp/workspace
+
+workflows:
+  filter:
+    jobs:
+      - setup
       - path-filtering/filter:
+          requires:
+            - setup
           base-revision: main
-          config-path: .circleci/generated.yml
+          config-path: /tmp/workspace/generated.yml
           mapping: |
             packages/foo/.* run-foo true
             packages/bar/.* run-bar true
-
-workflows:
-  always-run:
-    jobs:
-      - setup
