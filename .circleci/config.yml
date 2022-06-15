@@ -21,14 +21,14 @@ jobs:
             cat .circleci/generated.yml
       - continuation/continue:
           configuration_path: .circleci/generated.yml
-
-workflows:
-  always-run:
-    jobs:
-      - setup
       - path-filtering/filter:
           base-revision: main
           config-path: .circleci/generated.yml
           mapping: |
             packages/foo/.* run-foo true
             packages/bar/.* run-bar true
+
+workflows:
+  always-run:
+    jobs:
+      - setup
