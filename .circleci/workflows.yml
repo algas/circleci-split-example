@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  foo:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Foo Step
+          command: |
+            echo 'Hello World!'
+            echo 'foo package'
+  bar:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: The First Bar Step
+          command: |
+            echo 'Hello World!'
+            echo 'this is bar package'
+
+parameters:
+  run-foo:
+    type: boolean
+    default: false
+  run-bar:
+    type: boolean
+    default: false
