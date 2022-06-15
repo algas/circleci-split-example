@@ -4,13 +4,29 @@ setup: true
 
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
+  continuation: circleci/continuation@0.1.2
+
+jobs:
+  setup:
+    executor: continuation/default
+    steps:
+      - checkout
+      - run:
+          name: Generate config
+          command: |
+            ./generate-config.sh > .circleci/generated.yml
+      - continuation/continue:
+          configuration_path: .circleci/generated.yml
 
 workflows:
+  setup:
+    jobs:
+      - setup
   filter:
     jobs:
       - path-filtering/filter:
           base-revision: main
-          config-path: .circleci/workflows.yml
+          config-path: .circleci/generated.yml
           mapping: |
             packages/foo/.* run-foo true
             packages/bar/.* run-bar true
