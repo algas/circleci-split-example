@@ -31,9 +31,6 @@ parameters:
     default: false
 
 workflows:
-  always-run:
-    jobs:
-      - setup
   foo:
     when: << pipeline.parameters.run-foo >>
     jobs:
