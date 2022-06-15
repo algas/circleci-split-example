@@ -5,12 +5,34 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
 
+jobs:
+  setup:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run:
+          name: Generate config
+          command: |
+            mkdir -p /tmp/workspace
+            ./generate-config.sh > /tmp/workspace/generated.yml
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - generated.yml
+
 workflows:
   filter:
     jobs:
+      - setup
       - path-filtering/filter:
+          requires:
+            - setup
+          pre-steps:
+            - attach_workspace:
+                at: /tmp/workspace
           base-revision: main
-          config-path: .circleci/workflows.yml
+          config-path: /tmp/workspace/generated.yml
           mapping: |
             packages/foo/.* run-foo true
             packages/bar/.* run-bar true
