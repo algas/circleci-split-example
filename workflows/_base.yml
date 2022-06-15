@@ -8,6 +8,8 @@ parameters:
     type: boolean
     default: false
 
+jobs:
+
 workflows:
   foo:
     when: << pipeline.parameters.run-foo >>
@@ -18,4 +20,3 @@ workflows:
     jobs:
       - bar
 
-jobs:

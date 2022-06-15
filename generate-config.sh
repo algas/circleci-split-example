@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cat ./workflows/*.yml
+yq eval-all '. as $item ireduce ({}; . * $item )' ./workflows/*.yml

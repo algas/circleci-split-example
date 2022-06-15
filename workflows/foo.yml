@@ -1,3 +1,4 @@
+jobs:
   foo:
     docker:
       - image: cimg/base:2021.04

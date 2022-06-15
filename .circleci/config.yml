@@ -8,9 +8,13 @@ orbs:
 jobs:
   setup:
     docker:
-      - image: cimg/base:2021.04
+      - image: circleci/python:3.10-bullseye
     steps:
       - checkout
+      - run:
+          name: Install yq
+          command: |
+            pip install yq==2.14.0
       - run:
           name: Generate config
           command: |
