@@ -23,11 +23,9 @@ jobs:
           configuration_path: .circleci/generated.yml
 
 workflows:
-  setup:
-    jobs:
-      - setup
   always-run:
     jobs:
+      - setup
       - path-filtering/filter:
           base-revision: main
           config-path: .circleci/generated.yml
