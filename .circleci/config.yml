@@ -22,7 +22,6 @@ jobs:
             mkdir -p /tmp/workspace
             ./generate-config.sh > /tmp/workspace/generated.yml
             cat /tmp/workspace/generated.yml
-          working_directory: ~/workflows
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
