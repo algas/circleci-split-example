@@ -8,13 +8,13 @@ orbs:
 jobs:
   setup:
     docker:
-      - image: circleci/golang:1.16-bullseye
+      - image: circleci/golang:1.15-bullseye
     steps:
       - checkout
       - run:
           name: Install yq
           command: |
-            go install github.com/mikefarah/yq/v4@latest
+            go install github.com/mikefarah/yq/v4@v4.14.1
       - run:
           name: Generate config
           command: |
