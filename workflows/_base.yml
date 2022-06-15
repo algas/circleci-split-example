@@ -1,22 +1,7 @@
 version: 2.1
 
 parameters:
-  run-foo:
-    type: boolean
-    default: false
-  run-bar:
-    type: boolean
-    default: false
 
 jobs:
 
 workflows:
-  foo:
-    when: << pipeline.parameters.run-foo >>
-    jobs:
-      - foo
-  bar:
-    when: << pipeline.parameters.run-bar >>
-    jobs:
-      - bar
-
