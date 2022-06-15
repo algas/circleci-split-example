@@ -16,9 +16,9 @@ jobs:
           command: |
             ./generate-config.sh > .circleci/generated.yml
       - run:
-          name: ls
+          name: cat
           command: |
-            ls
+            cat .circleci/generated.yml
       - continuation/continue:
           configuration_path: .circleci/generated.yml
 
