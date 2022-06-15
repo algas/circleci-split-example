@@ -12,20 +12,20 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install yq
+          name: Install yq4
           command: |
             go install github.com/mikefarah/yq/v4@latest
             yq --version
       - run:
-          name: Generate config
+          name: Merge config files
           command: |
             mkdir -p /tmp/workspace
-            ./generate-config.sh > /tmp/workspace/generated.yml
-            cat /tmp/workspace/generated.yml
+            yq eval-all '. as $item ireduce ({}; . * $item )' ./workflows/_base.yml ./workflows/packages/*.yml > /tmp/workspace/merged.yml
+            cat /tmp/workspace/merged.yml
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - generated.yml
+            - merged.yml
 
 workflows:
   filter:
@@ -38,7 +38,7 @@ workflows:
             - attach_workspace:
                 at: /tmp/workspace
           base-revision: main
-          config-path: /tmp/workspace/generated.yml
+          config-path: /tmp/workspace/merged.yml
           mapping: |
             packages/foo/.* run-foo true
             packages/bar/.* run-bar true

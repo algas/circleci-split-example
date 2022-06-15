@@ -1,3 +1,3 @@
 # this is bar package
 
-bar
+No contents in this package.
