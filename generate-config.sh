@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cat .circleci/workflows.yml
+cat .circleci/workflows/*.yml
