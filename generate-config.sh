@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-yq eval-all '. as $item ireduce ({}; . * $item )' ./workflows/*.yml
+ls -1 ./workflows/*.yml | sort | xargs yq eval-all '. as $item ireduce ({}; . * $item )'
