@@ -8,13 +8,13 @@ orbs:
 jobs:
   setup:
     docker:
-      - image: circleci/golang:1.15-buster
+      - image: cimg/go:1.18.3
     steps:
       - checkout
       - run:
           name: Install yq
           command: |
-            go get github.com/mikefarah/yq/v4@v4.14.1
+            GO111MODULE=on go get github.com/mikefarah/yq/v4
       - run:
           name: Generate config
           command: |
